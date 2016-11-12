@@ -7,7 +7,7 @@ r = requests.get('https://en.wikipedia.org/wiki/Singlish_vocabulary')
 soup = BeautifulSoup(r.text, 'html.parser')
 
 
-data = []
+data = [] #WORD-ORIGIN-DEFINATION-EXAMPLE
 for table in soup.find_all('table'):
     tr = table.tr
 
@@ -16,7 +16,8 @@ for table in soup.find_all('table'):
         row_cells = []
         for cell in row.find_all('td'):
             # replacing hyperlinks
-            cell = re.sub(r'(\[\d+\])',r'',cell.text)
+            temp = re.sub(r'(\[\d+\])',r'',cell.text)
+            cell = re.sub('\n','',temp)
             row_cells.append(cell)
         table_cells.append(row_cells)
 
